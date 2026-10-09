@@ -1,0 +1,13 @@
+[package]
+name = "draft"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "Precise imperial 2D drafting with DXF and scaled vector PDF output"
+repository = "https://github.com/dansc89/Draft"
+
+[dependencies]
+eframe = { version = "=0.36.2", default-features = false, features = ["default_fonts", "glow", "x11", "wayland"] }
+
+[profile.dev]
+debug = 0

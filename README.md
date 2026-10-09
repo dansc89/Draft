@@ -4,9 +4,15 @@ Accurate 2D drafting in feet and inches, with editable DXF drawings and scaled v
 
 **Early development, not production-ready.** Draft takes inspiration from the small, direct scope of early CAD tools; it is not an Autodesk product or a claim of AutoCAD compatibility.
 
-## First increment
+## Working first increment
 
-The initial build targets line drawing, architectural coordinate entry, orthogonal/grid interaction, undo/redo, supported LINE-only DXF save/reopen, and vector PDF export. See [the product contract](docs/product-contract.md) for the acceptance criteria and explicit limits. Features must be demonstrated by tests and independent file readers, not inferred from this roadmap.
+- Native Rust desktop canvas: two-click lines, selectable grid snapping, orthogonal cursor mode, zoom/pan and undo/redo.
+- Exact start/end coordinates in feet, inches and architectural fractions, stored as integer **1/64-inch ticks**. Unsupported precision is rejected, never silently rounded. Coordinate bounds are ±100,000 feet.
+- Save and reopen Draft's own LINE-only, inch-unit DXF subset, up to **8 MiB**. Oversized saves fail before writing and leave the drawing unsaved. Independent `ezdxf` auditing verifies the emitted geometry; externally edited/general DXF imports are **not** supported yet.
+- Vector PDF export: **landscape Letter, 1:48 (`1/4" = 1'-0"`)**, half-inch margins. Oversize drawings are rejected rather than silently scaled.
+- New-file-only saving/export, an unsaved Open guard and explicit unsaved-close confirmation. Choose a new filename for each save; overwrite, autosave and crash recovery remain future work.
+
+The headless demo produces a full-size **12-foot by 8-foot rectangle**. Independent readers verify its DXF endpoints and a **3-inch by 2-inch** vector rectangle in the PDF. See [the product contract](docs/product-contract.md) for limits. Native Wayland usability/performance and broader CAD interoperability remain unverified; this is not a production release.
 
 ## Development
 
