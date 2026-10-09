@@ -24,7 +24,9 @@ jobs:
       - name: Tests
         run: cargo test --locked
       - name: Generated drawing
-        run: cargo run --locked -- --demo dist/demo
+        run: |
+          mkdir -p dist
+          cargo run --locked -- --demo dist/demo
       - name: Independent DXF and PDF readers
         run: |
           python3 -m venv /tmp/draft-verify
